@@ -11,12 +11,6 @@ public:
 
 	~Caballero() {};
 
-	//In pixels
-	void setWidthSheet(int WidthSheet)		{ WidthSheet = WidthSheet; }
-	void setHeightSheet(int heightSheet)	{ heightSheet = heightSheet; }
-	void setColumns(int columns)			{ columns = columns; }
-	void setRows(int rows)					{ rows = rows; }
-	
 	void mover(Direcciones tecla, int WidthScreen, int HeightScreen) override {
 		//movimiento
 		dx = dy = 0;
@@ -45,7 +39,7 @@ public:
 		if (tecla == Derecha)	indexY = 3;
 
 		if (tecla != Ninguno) {
-			if (indexX == 1) indexX = 4;
+			if (indexX == 1) { indexX = 4; return; }
 			indexX = 1;
 		} else { indexX = 0; }
 	};

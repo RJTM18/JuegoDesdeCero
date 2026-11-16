@@ -30,9 +30,11 @@ namespace JuegoDesdeCero {
 	private:
 		Juego* juego;
 
-		Bitmap^ caballero;
+		Bitmap^ oldMan;
+		Bitmap^ young;
 
 		Direcciones teclaPresionada;
+
 	private: System::Windows::Forms::Panel^ pnlSprite;
 	private: System::Windows::Forms::Timer^ timer1;
 	private: System::ComponentModel::IContainer^ components;
@@ -85,14 +87,13 @@ namespace JuegoDesdeCero {
 	}
 
 	private: System::Void FrmJuego_Load(System::Object^ sender, System::EventArgs^ e) {
-		caballero = cargarImagen("Sprite\\caballero.png");
-		System::Drawing::Size s = caballero->Size; //s = sprite sheet
+		juego = new Juego(pnlSprite->Height, pnlSprite->Width);
 		
-		//caballero
-		juego->setCaballeroWidthSheet(s.Width);
-		juego->setCaballeroHeightSheet(s.Height);
-		juego->setCaballeroColumns(5);
-		juego->setCaballeroRows(4);
+		//oldMan = cargarImagen("Sprite\\old-man.png");
+		//juego->crearOldMan(30, pnlSprite->Height / 2, oldMan->Width, oldMan->Height, 6, 4);
+
+		young = cargarImagen("Sprite\\youngMan.png");
+		juego->crearYoung(30, pnlSprite->Height / 2, young->Width, young->Height, 12, 6);
 
 		teclaPresionada = Ninguno;
 	}
@@ -102,19 +103,18 @@ namespace JuegoDesdeCero {
 			int AnchoPantalla = pnlSprite->Width;
 
 			if (AltoPantalla <= 0 || AnchoPantalla <= 0) return;
-
-			if (juego == nullptr) juego = new Juego(AltoPantalla, AnchoPantalla);
-
-			juego->moverCaballero(teclaPresionada, AnchoPantalla, AltoPantalla);
+			
+			juego->moverYoung(teclaPresionada, AnchoPantalla, AltoPantalla);
 
 			Graphics^ canvas = pnlSprite->CreateGraphics();
 			BufferedGraphics^ buffer = BufferedGraphicsManager::Current->Allocate(canvas, pnlSprite->ClientRectangle);
 			buffer->Graphics->Clear(Color::White);
 
-			juego->DibujarCaballero(buffer->Graphics, caballero);
+			juego->dibujarYoung(buffer->Graphics, young);
 			buffer->Render(canvas);
 
-			delete buffer, canvas;
+			delete buffer;
+			delete canvas;
 		}
 
 		private: System::Void FrmJuego_keyDown(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
