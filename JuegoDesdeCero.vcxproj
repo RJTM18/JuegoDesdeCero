@@ -120,7 +120,7 @@
       <EntryPointSymbol>main</EntryPointSymbol>
     </Link>
     <PostBuildEvent>
-      <Command>xcopy /d /y "$(ProyectDir)\Sprite*.png" "$(OutDir)\Sprite"</Command>
+      <Command>xcopy /y /d /i "$(ProjectDir)Sprite\*.png" "$(OutDir)Sprite\"</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -146,6 +146,7 @@
     <ClInclude Include="FrmJuego.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Juego.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="Sprite.h" />
