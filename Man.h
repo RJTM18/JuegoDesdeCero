@@ -4,7 +4,7 @@
 class Man : public Sprite {
 public:
 	Man(int x, int y, int widthsheet, int heightsheet, int columns, int rows, int velocidad, int escala) : 
-		Sprite(x, y, widthsheet, heightsheet, columns, rows, velocidad,escala) { };
+		Sprite(x, y, widthsheet, heightsheet, columns, rows, velocidad, escala) { };
 	~Man() {};
 
 	void mover(Direcciones tecla, int WidthScreen, int HeightScreen) override {

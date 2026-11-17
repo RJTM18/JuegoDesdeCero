@@ -149,6 +149,7 @@
     <ClInclude Include="Juego.h" />
     <ClInclude Include="Lady.h" />
     <ClInclude Include="Man.h" />
+    <ClInclude Include="Mario.h" />
     <ClInclude Include="OldMan.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />

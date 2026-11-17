@@ -30,7 +30,7 @@ namespace JuegoDesdeCero {
 	private:
 		Juego* juego;
 
-		Bitmap^ man;
+		Bitmap^ Mario;
 
 		Direcciones teclaPresionada;
 
@@ -88,16 +88,16 @@ namespace JuegoDesdeCero {
 	private: System::Void FrmJuego_Load(System::Object^ sender, System::EventArgs^ e) {
 		juego = new Juego(pnlSprite->Height, pnlSprite->Width);
 		
-		man = cargarImagen("Sprite\\man.png");
-		juego->crearMan(
+		Mario = cargarImagen("Sprite\\Mario.png");
+		juego->crearMario(
 			/* Posicion x: */			30, 
 			/* Posicion y: */			pnlSprite->Height / 2, 
-			/* Anchura de Imagen: */	man->Width, 
-			/* Altura de Imagen: */		man->Height,
-			/* Nº Columnas: */			12, 
-			/* Nº Filas: */				4, 
-			/* Velocidad: */			10, 
-			/* Escala: */				1
+			/* Anchura de Imagen: */	Mario->Width,
+			/* Altura de Imagen: */		Mario->Height,
+			/* Nº Columnas: */			10, 
+			/* Nº Filas: */				19, 
+			/* Velocidad: */			30, 
+			/* Escala: */				4
 		);
 
 		teclaPresionada = Ninguno;
@@ -109,13 +109,13 @@ namespace JuegoDesdeCero {
 
 			if (AltoPantalla <= 0 || AnchoPantalla <= 0) return;
 			
-			juego->moverMan(teclaPresionada, AnchoPantalla, AltoPantalla);
+			juego->moverMario(teclaPresionada, AnchoPantalla, AltoPantalla);
 
 			Graphics^ canvas = pnlSprite->CreateGraphics();
 			BufferedGraphics^ buffer = BufferedGraphicsManager::Current->Allocate(canvas, pnlSprite->ClientRectangle);
 			buffer->Graphics->Clear(Color::White);
 
-			juego->dibujarMan(buffer->Graphics, man);
+			juego->dibujarMario(buffer->Graphics, Mario);
 			buffer->Render(canvas);
 
 			delete buffer;
@@ -127,6 +127,7 @@ namespace JuegoDesdeCero {
 			if (e->KeyCode == Keys::Up || e->KeyCode == Keys::W)	teclaPresionada = Arriba;
 			if (e->KeyCode == Keys::Left || e->KeyCode == Keys::A)	teclaPresionada = Izquierda;
 			if (e->KeyCode == Keys::Right || e->KeyCode == Keys::D) teclaPresionada = Derecha;
+			if (e->KeyCode == Keys::Space) juego->saltarMario(teclaPresionada, pnlSprite->Width, pnlSprite->Height);
 		}
 
 		private: System::Void FrmJuego_keyUp(System::Object^ sender, System::Windows::Forms::KeyEventArgs^ e) {
@@ -135,5 +136,6 @@ namespace JuegoDesdeCero {
 			if (e->KeyCode == Keys::Left || e->KeyCode == Keys::A)  { if (teclaPresionada == Izquierda) teclaPresionada = Ninguno; }
 			if (e->KeyCode == Keys::Right || e->KeyCode == Keys::D) { if (teclaPresionada == Derecha)	teclaPresionada = Ninguno; }
 		}
+
 };
 }
