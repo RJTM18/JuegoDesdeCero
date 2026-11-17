@@ -3,8 +3,8 @@
 
 class Young : public Sprite{
 public:
-	Young(int x, int y, int widthSheet, int heightSheet, int columns, int rows) : Sprite(x, y, widthSheet, heightSheet, columns, rows) {
-		this->velocidad = 30;
+	Young(int x, int y, int widthSheet, int heightSheet, int columns, int rows, int escala) : Sprite(x, y, widthSheet, heightSheet, columns, rows, escala) {
+		this->velocidad = 10;
 		this->indexY = 2;
 	};
 	~Young() {};

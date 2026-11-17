@@ -44,6 +44,12 @@
     <ClInclude Include="Young.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Lady.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Man.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

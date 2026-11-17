@@ -30,8 +30,7 @@ namespace JuegoDesdeCero {
 	private:
 		Juego* juego;
 
-		Bitmap^ oldMan;
-		Bitmap^ young;
+		Bitmap^ man;
 
 		Direcciones teclaPresionada;
 
@@ -89,11 +88,17 @@ namespace JuegoDesdeCero {
 	private: System::Void FrmJuego_Load(System::Object^ sender, System::EventArgs^ e) {
 		juego = new Juego(pnlSprite->Height, pnlSprite->Width);
 		
-		//oldMan = cargarImagen("Sprite\\old-man.png");
-		//juego->crearOldMan(30, pnlSprite->Height / 2, oldMan->Width, oldMan->Height, 6, 4);
-
-		young = cargarImagen("Sprite\\youngMan.png");
-		juego->crearYoung(30, pnlSprite->Height / 2, young->Width, young->Height, 12, 6);
+		man = cargarImagen("Sprite\\man.png");
+		juego->crearMan(
+			/* Posicion x: */			30, 
+			/* Posicion y: */			pnlSprite->Height / 2, 
+			/* Anchura de Imagen: */	man->Width, 
+			/* Altura de Imagen: */		man->Height,
+			/* Nº Columnas: */			12, 
+			/* Nº Filas: */				4, 
+			/* Velocidad: */			10, 
+			/* Escala: */				1
+		);
 
 		teclaPresionada = Ninguno;
 	}
@@ -104,13 +109,13 @@ namespace JuegoDesdeCero {
 
 			if (AltoPantalla <= 0 || AnchoPantalla <= 0) return;
 			
-			juego->moverYoung(teclaPresionada, AnchoPantalla, AltoPantalla);
+			juego->moverMan(teclaPresionada, AnchoPantalla, AltoPantalla);
 
 			Graphics^ canvas = pnlSprite->CreateGraphics();
 			BufferedGraphics^ buffer = BufferedGraphicsManager::Current->Allocate(canvas, pnlSprite->ClientRectangle);
 			buffer->Graphics->Clear(Color::White);
 
-			juego->dibujarYoung(buffer->Graphics, young);
+			juego->dibujarMan(buffer->Graphics, man);
 			buffer->Render(canvas);
 
 			delete buffer;
